@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de Edad</title>
+</head>
+<body>
+  <h1>Calculadora de Edad</h1>
+  <p id="errorMensaje" style="color: red;"></p>
+  <label for="añoNacimiento">Año de Nacimiento:</label>
+  <input type="number" id="añoNacimiento">
+  <label for="mesNacimiento">Mes de Nacimiento:</label>
+  <input type="number" id="mesNacimiento">
+  <label for="diaNacimiento">Día de Nacimiento:</label>
+  <input type="number" id="diaNacimiento">
+  <button onclick="calcularEdad()">Calcular Edad</button>
+  <p>
+    <label for="añosResultado">Años:</label>
+    <span id="añosResultado"></span>
+  </p>
+  <p>
+    <label for="mesesResultado">Meses:</label>
+    <span id="mesesResultado"></span>
+  </p>
+  <p>
+    <label for="diasResultado">Días:</label>
+    <span id="diasResultado"></span>
+  </p>
+
+  <script>
+    function calcularEdad() {
+      const añoNacimiento = parseInt(document.getElementById("añoNacimiento").value);
+      const mesNacimiento = parseInt(document.getElementById("mesNacimiento").value) - 1;
+      const diaNacimiento = parseInt(document.getElementById("diaNacimiento").value);
+
+      const errorMensaje = document.getElementById("errorMensaje");
+      const añosResultado = document.getElementById("añosResultado");
+      const mesesResultado = document.getElementById("mesesResultado");
+      const diasResultado = document.getElementById("diasResultado");
+
+      // Restablecer los mensajes de error y resultados anteriores
+      errorMensaje.textContent = "";
+      añosResultado.textContent = "";
+      mesesResultado.textContent = "";
+      diasResultado.textContent = "";
+
+      if (
+        isNaN(añoNacimiento) || isNaN(mesNacimiento) || isNaN(diaNacimiento) ||
+        añoNacimiento <= 0 || mesNacimiento < 0 || mesNacimiento > 11 || diaNacimiento <= 0 || diaNacimiento > 31
+      ) {
+        errorMensaje.textContent = "Fecha incorrecta. Ingrese un valor válido.";
+        return;
+      }
+
+      const fechaNacimiento = new Date(añoNacimiento, mesNacimiento, diaNacimiento);
+
+      // Validar febrero y años bisiestos
+      if (mesNacimiento === 1 && diaNacimiento > 28) {
+        if (!((añoNacimiento % 4 === 0 && añoNacimiento % 100 !== 0) || añoNacimiento % 400 === 0)) {
+          errorMensaje.textContent = "Fecha incorrecta. Febrero tiene un máximo de 28 días en años no bisiestos.";
+          return;
+        }
+      }
+
+      // Validar meses con 30 días
+      if ((mesNacimiento === 3 || mesNacimiento === 5 || mesNacimiento === 8 || mesNacimiento === 10) && diaNacimiento > 30) {
+        errorMensaje.textContent = "Fecha incorrecta. Este mes tiene un máximo de 30 días.";
+        return;
+      }
+
+      const fechaActual = new Date();
+
+      // Validar si la fecha de nacimiento es mayor que la fecha actual
+      if (fechaNacimiento >= fechaActual) {
+        errorMensaje.textContent = "Fecha incorrecta. La fecha de nacimiento no puede ser igual o mayor que la fecha actual.";
+        return;
+      }
+
+      const diferencia = fechaActual - fechaNacimiento;
+      const edad = new Date(diferencia);
+
+      const años = edad.getUTCFullYear() - 1970;
+      const meses = edad.getUTCMonth();
+      const días = edad.getUTCDate() - 1;
+
+      añosResultado.textContent = años;
+      mesesResultado.textContent = meses;
+      díasResultado.textContent = días;
+    }
+  </script>
+</body>
+</html>
+

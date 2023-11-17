@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Age calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="Calculadora">
+    <button class="Boton" id="Boton">
+      <img src="/assets/images/icon-arrow.svg" alt="">
+    </button>
+    <div class="FechaAntigua">
+      <article class="Fecha Day">
+        <label id="TituloFecha" for="">DAY</label>
+        <input id="Day" type="text" placeholder="DD">
+        <label id="Error" for="">This field is required</label>
+      </article>
+      <article class="Fecha Month">
+        <label id="TituloFecha" for="">MONTH</label>
+        <input id="Month" type="text" placeholder="MM">
+        <label id="Error" for="">This field is required</label>
+      </article>
+      <article class="Fecha Year">
+        <label id="TituloFecha" for="">YEAR</label>
+        <input id="Year" type="text" placeholder="YYYY">
+        <label id="Error" for="">This field is required</label>
+      </article>
+    </div>
+    <div class="Resultado">
+      <article class="Resultados Years">
+        <label for="">--</label>
+        <h2>years</h2>
+      </article>
+      <article class="Resultados Months">
+        <label for="">--</label>
+        <h2>months</h2>
+      </article>
+      <article class="Resultados Days">
+        <label for="">--</label>
+        <h2>days</h2>
+      </article>
+    </div>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>
